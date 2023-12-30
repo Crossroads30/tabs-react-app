@@ -5,8 +5,9 @@ const url = 'https://course-api.com/react-tabs-project'
 
 function App() {
 	const [loading, setLoading] = useState(true)
-	const [jobs, setJobs] = useState([])
 	const [isError, setIsError] = useState(false)
+	const [jobs, setJobs] = useState([])
+	const [value, setValue] = useState(0)
 
 	const fetchingData = async () => {
 		try {
@@ -18,9 +19,9 @@ function App() {
 				return
 			}
 			const jobs = await response.json()
-			console.log(jobs)
 			setLoading(false)
 			setJobs(jobs)
+			// console.log(jobs)
 		} catch (error) {
 			console.log(error)
 			setIsError(true)
@@ -54,25 +55,34 @@ function App() {
 				</div>
 				<div className='jobs-center'>
 					<div className='btn-container'>
-						{jobs.map(job => {
+						{jobs.map((job, index) => {
 							return (
-								<button className='job-btn active-btn' type='button'>
+								<button
+									onClick={() => setValue(index)}
+									key={index}
+									className='job-btn active-btn'
+									type='button'
+								>
 									{job.company}
 								</button>
 							)
 						})}
 					</div>
 					<article className='job-info'>
-						<h3>sfddfd</h3>
-						<h4>sdfsdfsd</h4>
-						<p className='job-date'>dfdfdfd</p>
-						<div className='job-desc'>
-							<FaAngleDoubleRight className='job-icon' />
-							<p>dfvdfv</p>
-						</div>
+						<h3>{jobs[value].title}</h3>
+						<h4>{jobs[value].company}</h4>
+						<p className='job-date'>{jobs[value].dates}</p>
+						{jobs[value].duties.map((duty, index) => {
+							return (
+								<div key={index} className='job-desc'>
+									<FaAngleDoubleRight className='job-icon' />
+									<p>{duty}</p>
+								</div>
+							)
+						})}
 					</article>
 				</div>
-        <button className='btn'>more info</button>
+				<button className='btn'>more info</button>
 			</section>
 		</main>
 	)
