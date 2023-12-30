@@ -45,7 +45,7 @@ function App() {
 	if (isError) {
 		return <h3>There was an error!</h3>
 	}
-
+const { title, company, dates } = jobs[value]
 	return (
 		<main>
 			<section className='section'>
@@ -69,9 +69,9 @@ function App() {
 						})}
 					</div>
 					<article className='job-info'>
-						<h3>{jobs[value].title}</h3>
-						<h4>{jobs[value].company}</h4>
-						<p className='job-date'>{jobs[value].dates}</p>
+						<h3>{title}</h3>
+						<h4>{company}</h4>
+						<p className='job-date'>{dates}</p>
 						{jobs[value].duties.map((duty, index) => {
 							return (
 								<div key={index} className='job-desc'>
