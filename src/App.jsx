@@ -45,7 +45,7 @@ function App() {
 	if (isError) {
 		return <h3>There was an error!</h3>
 	}
-const { title, company, dates } = jobs[value]
+	const { title, company, dates } = jobs[value]
 	return (
 		<main>
 			<section className='section'>
@@ -60,7 +60,7 @@ const { title, company, dates } = jobs[value]
 								<button
 									onClick={() => setValue(index)}
 									key={index}
-									className='job-btn active-btn'
+									className={`job-btn ${index === value && 'active-btn'}`}
 									type='button'
 								>
 									{job.company}
